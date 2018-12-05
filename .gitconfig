@@ -1,0 +1,7 @@
+[user]
+  email = asb@asbradbury.org
+  name = Alex Bradbury
+[rerere]
+  enabled = 1
+[merge]
+  conflictstyle = diff3
