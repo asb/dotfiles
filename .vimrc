@@ -88,6 +88,8 @@ autocmd BufReadPost *
   \ |   exe "normal! g`\""
   \ | endif
 
+autocmd FileType markdown setlocal autoindent
+
 " Ensure built-in shell syntax highlighting assumes a posix shell syntax.
 let g:is_posix=1
 
