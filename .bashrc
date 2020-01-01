@@ -70,4 +70,5 @@ export WINEARCH=win32
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cwget="wget --content-disposition"
 
+export EDITOR=vim
 export PATH="$HOME/bin:$PATH"
