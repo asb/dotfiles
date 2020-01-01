@@ -67,7 +67,6 @@ fi
 export WINEARCH=win32
 
 # Aliases
-alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cwget="wget --content-disposition"
 
 export EDITOR=vim

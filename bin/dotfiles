@@ -1,0 +1,37 @@
+#!/bin/sh
+
+if ! [ -e $HOME/.dotfiles ]; then
+  echo "\$HOME/.dotfiles doesn't exist. Did you clone the dotfiles repo correctly?"
+  exit 1
+fi
+
+if [ $# -eq 0 ]; then
+  cat <<"EOF"
+This wrapper script uses git to manage dotfiles, with git metadata stored in $HOME/.dotfiles.
+To set up on a new machine:
+  git clone --no-checkout git@github.com:asb/dotfiles.git tmpdotfiles && mv tmpdotfiles/.git $HOME/.dotfiles && rm -rf tmpdotfiles
+  git --git-dir=$HOME/.dotfiles --work-tree=$HOME reset
+  git --git-dir=$HOME/.dotfiles --work-tree=$HOME checkout
+  dotfiles config --local status.showUntrackedFiles no
+
+To show the status including untracked files:
+  dotfiles status --unormal
+
+To list all tracked files:
+  dotfiles ls
+
+To view the repo in a tool such as tig:
+  GIT_DIR=$HOME/.dotfiles tig
+
+Otherwise, use standard git commands.
+EOF
+  exit 1
+fi
+
+if [ "$1" = "ls" ]; then
+  shift
+  cd $HOME && ls --color=auto -d $(git --git-dir=$HOME/.dotfiles ls-tree -rt HEAD --name-only "$@")
+  exit
+fi
+
+exec git --git-dir=$HOME/.dotfiles --work-tree=$HOME "$@"
