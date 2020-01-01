@@ -5,3 +5,7 @@
   enabled = 1
 [merge]
   conflictstyle = diff3
+[alias]
+  fetch-pr = "!f() { REMOTE=${2:-$(git remote |grep ^upstream || echo origin)}; git fetch -fu $REMOTE refs/pull/$1/head:pr-$REMOTE-$1; }; f"
+  checkout-pr = "!f() { REMOTE=${2:-$(git remote |grep ^upstream || echo origin)}; git fetch -fu $REMOTE refs/pull/$1/head:pr-$REMOTE-$1 && git checkout pr-$REMOTE-$1; }; f"
+  delete-pr-branches = "!git for-each-ref refs/heads/pr-* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
